@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title%}Transactions{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center m-4">Transaction List</h1>
+<table class="table table-bordered text-center">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Title</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{transaction.date}}</td>
+        <td>{{transaction.title}}</td>
+        <td>{{transaction.amount}}</td>
+        <td>
+            {% if transaction.transaction_type == 'Income' %}
+             Credit
+            {% else %}
+             Debit
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

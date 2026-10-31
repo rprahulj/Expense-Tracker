@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center text-center mb-4">
+        <h1 class="fw-bold">Welcome to your Dashboard {{request.user|capfirst}}</h1>
+        <p class="text-muted lead">Track your Income, Expenses and Goals effectively</p>
+    </div>
+    <div class="row text-center g-4">
+        <div class="col-4">
+            <div class="p-3 border bg-white rounded shadow-sm">
+                <h2 class="text-muted mb-1 fs-2">Total Income</h2>
+                <p class="text-success fw-bold mb-0 fs-4">₹{{total_income}}</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="p-3 border bg-white rounded shadow-sm">
+                <h2 class="text-muted fs-2 mb-1">Total Expense</h2>
+                <p class="text-danger fw-bold mb-0 fs-4">₹{{total_expense}}</p>
+            </div>
+        </div>  
+        <div class="col-4">
+            <div class="p-3 border bg-white rounded shadow-sm">
+                <h2 class="text-muted mb-1 fs-2">Net Saving</h2>
+                <p class="text-primary fw-bold mb-0 fs-4">₹{{net_savings}}</p>
+            </div>
+        </div>               
+    </div>
+</div>
+<div class="container shadow py-3 mt-5">
+    <h2 class="mb-3">Your Goals</h2>
+    <ul class="list-group">
+        {% for item in goal_progress %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="fw-bold mb-1">{{ item.goal.name }}</h5>
+                <p class="text-muted mb-0 small">Target: ₹{{ item.goal.target_amount }} </p>
+                <p class="text-muted mb-0 small">Deadline: {{item.goal.deadline }}</p>
+            </div>
+            <div>
+                <span class="badge bg-primary fs-6 px-3 py-2">{{ item.progress|floatformat:2 }}%</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="text-center mt-3">
+<a class="btn btn-primary px-4 py-2" href="{% url 'goal_add' %}">Add Goals</a>
+</div>
+
+{% endblock %}

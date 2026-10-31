@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Transaction{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5 m-4">
+				<div class="card shadow p-4">
+                    <h2 class="text-center mb-4">Add New Transaction</h2>
+                    <p class="text-center">Record your income or expenses</p>
+                    <form action="" class="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="title">Title</label>
+                            <input type="text" id="title" class="form-control" name="title"
+                             placeholder="Enter Transaction title(e.g. salary)" required>
+                             {% if form.title.errors %}
+                            <p>{{ form.title.errors.0 }}</p>
+                             {% endif %}
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="amount">Amount</label>
+                            <input type="number" step="0.01" min="0.01" id="amount" class="form-control" name="amount"
+                             placeholder="Enter Amount" required>
+                             {% if form.amount.errors %}
+                            <p>{{ form.amount.errors.0 }}</p>
+                             {% endif %}
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="transaction_type">Transaction Type</label>
+                            <select name="transaction_type" id="transaction_type" class="form-control">
+                                <option value="" disabled selected>Select Transaction Type</option>
+                                <option value="Income">Income</option>
+                                <option value="Expense">Expense</option>
+                            </select>
+                             {% if form.transaction_type.errors %}
+                            <p>{{ form.transaction_type.errors.0 }}</p>
+                             {% endif %}
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="date">Date</label>
+                            <input type="date" id="date" class="form-control" name="date"
+                             placeholder="Enter Date" required>
+                             {% if form.date.errors %}
+                            <p>{{ form.date.errors.0 }}</p>
+                             {% endif %}
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="category">Category</label>
+                            <input type="text" id="category" class="form-control" name="category"
+                             placeholder="Enter Transaction Category(e.g. food)" required>
+                             {% if form.category.errors %}
+                            <p>{{ form.category.errors.0 }}</p>
+                             {% endif %}
+                        </div>
+                        <div class="center d-grid mb-2 pt-2">
+                            <button type="submit" class="btn btn-primary">ADD Transaction</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
